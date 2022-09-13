@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="premperor" GeneratedClassName="Premperor">
+  <Profiles />
+  <Settings>
+    <Setting Name="OneCommentDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DisplayHtmlPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">display.html</Value>
+    </Setting>
+    <Setting Name="HttpPort" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">3123</Value>
+    </Setting>
+    <Setting Name="WsPort" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">3124</Value>
+    </Setting>
+    <Setting Name="SendInterval" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="RankingLimit" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

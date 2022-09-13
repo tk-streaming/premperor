@@ -1,0 +1,79 @@
+﻿
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>PREmperor - display</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .message {
+            display: table;
+            animation: fadeup 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
+
+            /* 以下に，メッセージのスタイルを記述する */
+            font-family: Meiryo;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        @keyframes fadeup {
+            0% {
+                transform: translateX(150px);
+                opacity: 0;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+    <script>
+
+
+        /// 表示するメッセージを生成して返す
+        /// 使用できる変数:
+        /// commentInfo.id          ユーザーID
+        /// commentInfo.username    ユーザー名
+        /// commentInfo.nickname    ニックネーム（設定されていない場合は空文字列）
+        /// commentInfo.service     配信プラットフォーム名（youtube | twitch | e.t.c.）
+        /// commentInfo.interval    前回コメントからの時間（ミリ秒）？
+        /// commentInfo.lang        言語（ただしなぜか常に空文字列）
+        /// commentInfo.icon        アイコンのURL
+        /// commentInfo.allowIcon   アイコンの表示を許可しているか否かの boolean 値
+        /// comment.tc              総コメント数
+        /// comment.tgc             スパチャ・ギフト関連の何か．金額？回数？
+        function makeMessageText(commentInfo) {
+
+            // ニックネームが設定されている場合はそれを，そうでない場合はユーザー名を表示名とする
+            let displayName = commentInfo.nickname === '' ? commentInfo.username : commentInfo.nickname;
+
+            // 表示名の(maxLetters)文字以降はカットする
+            const maxLetters = 10;
+            if (displayName.length > maxLetters) {
+                displayName = `${displayName.slice(0, maxLetters)}...`;
+            }
+
+            return `${displayName}さん 現在${commentInfo.tc}P`;
+        }
+
+
+        const sock = new WebSocket('ws://localhost:3124');
+        sock.onmessage = (e) => {
+            const x = JSON.parse(e.data);
+            document.querySelector("#messages").innerHTML = `<div class="message">${makeMessageText(x)}</div>`;
+        };
+    </script>
+</head>
+<body>
+    <div id="messages"></div>
+</body>
+</html>
