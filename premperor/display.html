@@ -1,4 +1,6 @@
 ﻿
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,27 +11,32 @@
             background-color: black;
             color: white;
         }
+
         .message {
             display: table;
-            animation: fadeup 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
-
+            animation: fadeup_right2left 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
             /* 以下に，メッセージのスタイルを記述する */
             font-family: Meiryo;
-            font-size: 22px;
+            font-size: 96px;
             font-weight: bold;
             color: white;
         }
+        .icon img {
+            width: 96px;
+            height: 96px;
+            /* アイコンの丸抜きをする場合は以下を有効化:
+            border-radius: 50%; 
+            */
+        }
 
-        @keyframes fadeup {
+        @keyframes fadeup_right2left {
             0% {
                 transform: translateX(150px);
                 opacity: 0;
             }
-
             80% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 1;
                 transform: translateX(0);
@@ -62,7 +69,15 @@
                 displayName = `${displayName.slice(0, maxLetters)}...`;
             }
 
-            return `${displayName}さん 現在${commentInfo.tc}P`;
+            // 表示するテキスト
+            const text = `${displayName}さん 現在${commentInfo.tc}P`;
+
+            // 許可されているならばアイコンを表示
+            // const iconHtml = commentInfo.allowIcon ? `<span class="icon"><img src="${commentInfo.icon}" /></span>&nbsp;` : '';
+            // 常にアイコンを表示する場合は，上の行をコメントアウトして，以下のコメントアウトを解除
+            const iconHtml = `<span class="icon"><img src="${commentInfo.icon}" /></span>&nbsp;`;
+
+            return `${iconHtml}<span class="text">${text}</span>`;
         }
 
 
