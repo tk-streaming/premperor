@@ -94,5 +94,29 @@ namespace premperor {
                 this["RankingLimit"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("watching")]
+        public string ObservationType {
+            get {
+                return ((string)(this["ObservationType"]));
+            }
+            set {
+                this["ObservationType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public uint PoolingTypeObservationInterval {
+            get {
+                return ((uint)(this["PoolingTypeObservationInterval"]));
+            }
+            set {
+                this["PoolingTypeObservationInterval"] = value;
+            }
+        }
     }
 }

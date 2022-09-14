@@ -23,6 +23,9 @@ namespace premperor
             numWsPort.Value = Premperor.Default.WsPort;
             numSendInterval.Value = Premperor.Default.SendInterval;
             numRankingLimit.Value = Premperor.Default.RankingLimit;
+            numPoolingInterval.Value = Premperor.Default.PoolingTypeObservationInterval;
+            rbWatchingType.Checked = Premperor.Default.ObservationType.ToLower() == "watching";
+            rbPoolingType.Checked = Premperor.Default.ObservationType.ToLower() == "pooling";
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -33,6 +36,15 @@ namespace premperor
             Premperor.Default.WsPort = (uint)numWsPort.Value;
             Premperor.Default.SendInterval = (uint)numSendInterval.Value;
             Premperor.Default.RankingLimit = (uint)numRankingLimit.Value;
+            Premperor.Default.PoolingTypeObservationInterval = (uint)numPoolingInterval.Value;
+            if (rbWatchingType.Checked)
+            {
+                Premperor.Default.ObservationType = "watching";
+            }
+            if (rbPoolingType.Checked)
+            {
+                Premperor.Default.ObservationType = "pooling";
+            }
             Premperor.Default.Save();
             Close();
             Application.Exit();

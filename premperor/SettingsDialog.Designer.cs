@@ -46,10 +46,17 @@ namespace premperor
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label6 = new System.Windows.Forms.Label();
             this.numRankingLimit = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numPoolingInterval = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.rbPoolingType = new System.Windows.Forms.RadioButton();
+            this.rbWatchingType = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numHttpPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWsPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSendInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRankingLimit)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPoolingInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // numHttpPort
@@ -116,7 +123,7 @@ namespace premperor
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(736, 331);
+            this.btnOK.Location = new System.Drawing.Point(836, 320);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(257, 44);
             this.btnOK.TabIndex = 4;
@@ -237,11 +244,78 @@ namespace premperor
             0,
             0});
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.numPoolingInterval);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.rbPoolingType);
+            this.groupBox1.Controls.Add(this.rbWatchingType);
+            this.groupBox1.Location = new System.Drawing.Point(520, 28);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(573, 161);
+            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "リスナーデータの監視タイプ";
+            // 
+            // numPoolingInterval
+            // 
+            this.numPoolingInterval.Location = new System.Drawing.Point(342, 113);
+            this.numPoolingInterval.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numPoolingInterval.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numPoolingInterval.Name = "numPoolingInterval";
+            this.numPoolingInterval.Size = new System.Drawing.Size(109, 31);
+            this.numPoolingInterval.TabIndex = 19;
+            this.numPoolingInterval.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(185, 115);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(151, 25);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "チェックの間隔[ms]:";
+            // 
+            // rbPoolingType
+            // 
+            this.rbPoolingType.AutoSize = true;
+            this.rbPoolingType.Location = new System.Drawing.Point(36, 78);
+            this.rbPoolingType.Name = "rbPoolingType";
+            this.rbPoolingType.Size = new System.Drawing.Size(534, 29);
+            this.rbPoolingType.TabIndex = 1;
+            this.rbPoolingType.TabStop = true;
+            this.rbPoolingType.Text = "定期的にチェック（リスナーが多い or コメントが多い配信者にお勧め）";
+            this.rbPoolingType.UseVisualStyleBackColor = true;
+            // 
+            // rbWatchingType
+            // 
+            this.rbWatchingType.AutoSize = true;
+            this.rbWatchingType.Location = new System.Drawing.Point(36, 43);
+            this.rbWatchingType.Name = "rbWatchingType";
+            this.rbWatchingType.Size = new System.Drawing.Size(449, 29);
+            this.rbWatchingType.TabIndex = 0;
+            this.rbWatchingType.TabStop = true;
+            this.rbWatchingType.Text = "データファイルの変更時にチェック（過疎配信者にお勧め）";
+            this.rbWatchingType.UseVisualStyleBackColor = true;
+            // 
             // SettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 387);
+            this.ClientSize = new System.Drawing.Size(1105, 378);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.numRankingLimit);
             this.Controls.Add(this.label5);
@@ -270,6 +344,9 @@ namespace premperor
             ((System.ComponentModel.ISupportInitialize)(this.numWsPort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSendInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRankingLimit)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPoolingInterval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,5 +370,10 @@ namespace premperor
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numRankingLimit;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RadioButton rbPoolingType;
+        private System.Windows.Forms.RadioButton rbWatchingType;
+        private System.Windows.Forms.NumericUpDown numPoolingInterval;
     }
 }

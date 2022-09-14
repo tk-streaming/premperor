@@ -15,7 +15,7 @@ namespace premperor
     {
         private ConcurrentQueue<CommentInfo> commentInfoQueue = new ConcurrentQueue<CommentInfo>();
 
-        private UserDbObserver observer;
+        private UserDbObserverBase observer;
         private SimpleServer server;
         public MainForm()
         {
@@ -38,7 +38,11 @@ namespace premperor
                         tsslNumOfQueue.Text = $"Send: {c.username}";
                     }));
                 };
-                observer = new UserDbObserver();
+                observer = Premperor.Default.ObservationType.ToLower() switch
+                {
+                    "pooling" => new PoolingUserDbObserver(),
+                    _ => new WatchingTypeUserDbObserver(),
+                };
                 observer.OnReadCallback = onUpdateScore;
 
                 InitializeComponent();
@@ -100,6 +104,7 @@ namespace premperor
             observer.ReadUserDb(false);
             server.Start();
             observer.StartObservation(this);
+            tsslObservationType.Text = $"[{observer.GetName()}]";
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)

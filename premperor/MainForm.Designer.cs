@@ -32,9 +32,10 @@ namespace premperor
             this.txtRanking = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslNumOfQueue = new System.Windows.Forms.ToolStripStatusLabel();
-            this.CopyURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsslObservationType = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -42,11 +43,13 @@ namespace premperor
             // txtRanking
             // 
             this.txtRanking.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtRanking.Location = new System.Drawing.Point(12, 36);
+            this.txtRanking.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtRanking.Location = new System.Drawing.Point(0, 33);
             this.txtRanking.Multiline = true;
             this.txtRanking.Name = "txtRanking";
             this.txtRanking.ReadOnly = true;
-            this.txtRanking.Size = new System.Drawing.Size(409, 495);
+            this.txtRanking.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtRanking.Size = new System.Drawing.Size(433, 302);
             this.txtRanking.TabIndex = 3;
             // 
             // menuStrip1
@@ -68,22 +71,6 @@ namespace premperor
             this.SettingsToolStripMenuItem.Text = "設定";
             this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslNumOfQueue});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 534);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(433, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // tsslNumOfQueue
-            // 
-            this.tsslNumOfQueue.Name = "tsslNumOfQueue";
-            this.tsslNumOfQueue.Size = new System.Drawing.Size(0, 15);
-            // 
             // CopyURLToolStripMenuItem
             // 
             this.CopyURLToolStripMenuItem.Name = "CopyURLToolStripMenuItem";
@@ -91,15 +78,37 @@ namespace premperor
             this.CopyURLToolStripMenuItem.Text = "表示URLをコピー";
             this.CopyURLToolStripMenuItem.Click += new System.EventHandler(this.CopyURLToolStripMenuItem_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslObservationType,
+            this.tsslNumOfQueue});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 303);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(433, 32);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslNumOfQueue
+            // 
+            this.tsslNumOfQueue.Name = "tsslNumOfQueue";
+            this.tsslNumOfQueue.Size = new System.Drawing.Size(0, 25);
+            // 
+            // tsslObservationType
+            // 
+            this.tsslObservationType.Name = "tsslObservationType";
+            this.tsslObservationType.Size = new System.Drawing.Size(181, 25);
+            this.tsslObservationType.Text = "toolStripStatusLabel1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 556);
+            this.ClientSize = new System.Drawing.Size(433, 335);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.txtRanking);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "PREmperor";
@@ -121,6 +130,7 @@ namespace premperor
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslNumOfQueue;
         private System.Windows.Forms.ToolStripMenuItem CopyURLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel tsslObservationType;
     }
 }
 

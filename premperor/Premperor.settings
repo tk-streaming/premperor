@@ -20,5 +20,11 @@
     <Setting Name="RankingLimit" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
+    <Setting Name="ObservationType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">watching</Value>
+    </Setting>
+    <Setting Name="PoolingTypeObservationInterval" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
