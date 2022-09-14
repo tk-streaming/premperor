@@ -31,6 +31,7 @@ namespace premperor
         private bool running = false;
         private ConcurrentQueue<CommentInfo> commentInfoQueue;
         public Action<CommentInfo> OnSend { get; set; }
+        private IList<IWebSocketConnection> sockets = new List<IWebSocketConnection>();
 
         public SimpleServer(ConcurrentQueue<CommentInfo> commentInfoQueue)
         {
@@ -78,23 +79,38 @@ namespace premperor
         private void StartWebswcoket(int port)
         {
             var server = new WebSocketServer($"ws://127.0.0.1:{port}");
-            server.Start(socket =>
-            {
-                Task.Run(() => { 
-                    while(running)
+            server.Start(socket => {
+                socket.OnOpen = () => {
+                    sockets.Add(socket);
+                };
+                socket.OnClose = () => {
+                    sockets.Remove(socket);
+                };
+                // socket.OnMessage = msg => {
+                //     foreach(var s in sockets)
+                //     {
+                //         s.Send("something");
+                //     }
+                // };
+            });
+
+            Task.Run(() => { 
+                while(running)
+                {
+                    if (commentInfoQueue.TryDequeue(out var commentInfo) && commentInfo != null)
                     {
-                        if (commentInfoQueue.TryDequeue(out var commentInfo) && commentInfo != null)
+                        OnSend?.Invoke(commentInfo);
+                        foreach(var socket in sockets)
                         {
-                            OnSend?.Invoke(commentInfo);
                             socket.Send(System.Text.Json.JsonSerializer.Serialize(commentInfo));
-                            Task.Delay((int)Premperor.Default.SendInterval).Wait();
                         }
-                        else
-                        {
-                            Task.Delay(100).Wait();
-                        }
+                        Task.Delay((int)Premperor.Default.SendInterval).Wait();
                     }
-                });
+                    else
+                    {
+                        Task.Delay(100).Wait();
+                    }
+                }
             });
         }
     }
