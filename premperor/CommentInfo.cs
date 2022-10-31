@@ -10,7 +10,6 @@ namespace premperor
         public string username { get; set; }
         public string nickname { get; set; }
         public string icon { get; set; }
-        public string lang { get; set; }
         public string service { get; set; }
         public bool allowIcon { get; set; }
         public decimal interval { get; set; }

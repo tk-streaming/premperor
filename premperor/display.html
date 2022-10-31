@@ -53,7 +53,6 @@
         /// commentInfo.nickname    ニックネーム（設定されていない場合は空文字列）
         /// commentInfo.service     配信プラットフォーム名（youtube | twitch | e.t.c.）
         /// commentInfo.interval    前回コメントからの時間（ミリ秒）？
-        /// commentInfo.lang        言語（ただしなぜか常に空文字列）
         /// commentInfo.icon        アイコンのURL
         /// commentInfo.allowIcon   アイコンの表示を許可しているか否かの boolean 値
         /// comment.tc              総コメント数
@@ -79,7 +78,6 @@
 
             return `${iconHtml}<span class="text">${text}</span>`;
         }
-
 
         const sock = new WebSocket('ws://localhost:3124');
         sock.onmessage = (e) => {

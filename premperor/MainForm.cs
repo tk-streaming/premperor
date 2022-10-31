@@ -117,5 +117,10 @@ namespace premperor
         {
             System.Windows.Forms.Clipboard.SetText($"http://localhost:{Premperor.Default.HttpPort}/");
         }
+
+        private void txtRanking_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

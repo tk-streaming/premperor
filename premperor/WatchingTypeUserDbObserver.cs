@@ -32,7 +32,6 @@ namespace premperor
                         username = (string)(user["username"]),
                         nickname = (string)(user["nickname"]),
                         icon = (string)(user["icon"]),
-                        lang = (string)(user["lang"]),
                         service = (string)(user["service"]),
                         allowIcon = (bool)(user["allowIcon"]),
                         interval = (decimal)(user["interval"]),
