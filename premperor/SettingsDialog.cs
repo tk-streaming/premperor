@@ -26,6 +26,8 @@ namespace premperor
             numPoolingInterval.Value = Premperor.Default.PoolingTypeObservationInterval;
             rbWatchingType.Checked = Premperor.Default.ObservationType.ToLower() == "watching";
             rbPoolingType.Checked = Premperor.Default.ObservationType.ToLower() == "pooling";
+            txtMessage.Text = Premperor.Default.IdleMessage;
+            numMessageInterval.Value = Premperor.Default.IdleMessageInterval;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -37,6 +39,8 @@ namespace premperor
             Premperor.Default.SendInterval = (uint)numSendInterval.Value;
             Premperor.Default.RankingLimit = (uint)numRankingLimit.Value;
             Premperor.Default.PoolingTypeObservationInterval = (uint)numPoolingInterval.Value;
+            Premperor.Default.IdleMessage = txtMessage.Text;
+            Premperor.Default.IdleMessageInterval = (uint)numMessageInterval.Value;
             if (rbWatchingType.Checked)
             {
                 Premperor.Default.ObservationType = "watching";

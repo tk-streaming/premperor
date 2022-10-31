@@ -14,13 +14,25 @@
 
         .message {
             display: table;
-            animation: fadeup_right2left 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;
-            /* 以下に，メッセージのスタイルを記述する */
+
+            /* 以下に，コメントポイント表示/待機時メッセージのスタイルを記述する */
             font-family: Meiryo;
-            font-size: 96px;
             font-weight: bold;
             color: white;
         }
+        .comment {
+            /* 以下に，コメントポイント表示のスタイルを記述する */
+            font-size: 96px;
+            margin-top: 0px;
+            animation: fadeup_right2left 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards;  /* 右から左へフェードイン */
+        }
+        .idle {
+            /* 以下に，待機時メッセージのスタイルを記述する */
+            font-size: 72px;
+            margin-top: 12px;
+            animation: fadeup_bottom2top 1s cubic-bezier(0.33, 1, 0.68, 1) 1 forwards; /* 下から上へフェードイン */
+        }
+
         .icon img {
             width: 96px;
             height: 96px;
@@ -42,6 +54,21 @@
                 transform: translateX(0);
             }
         }
+        @keyframes fadeup_bottom2top {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
     <script>
 
@@ -58,7 +85,6 @@
         /// comment.tc              総コメント数
         /// comment.tgc             スパチャ・ギフト関連の何か．金額？回数？
         function makeMessageText(commentInfo) {
-
             // ニックネームが設定されている場合はそれを，そうでない場合はユーザー名を表示名とする
             let displayName = commentInfo.nickname === '' ? commentInfo.username : commentInfo.nickname;
 
@@ -82,7 +108,12 @@
         const sock = new WebSocket('ws://localhost:3124');
         sock.onmessage = (e) => {
             const x = JSON.parse(e.data);
-            document.querySelector("#messages").innerHTML = `<div class="message">${makeMessageText(x)}</div>`;
+            if (x.name === "comment") {
+                document.querySelector("#messages").innerHTML = `<div class="message comment">${makeMessageText(x.data)}</div>`;
+            }
+            if (x.name === "message") {
+                document.querySelector("#messages").innerHTML = `<div class="message idle">${x.data}</div>`;
+            }
         };
     </script>
 </head>

@@ -118,5 +118,29 @@ namespace premperor {
                 this["PoolingTypeObservationInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IdleMessage {
+            get {
+                return ((string)(this["IdleMessage"]));
+            }
+            set {
+                this["IdleMessage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public uint IdleMessageInterval {
+            get {
+                return ((uint)(this["IdleMessageInterval"]));
+            }
+            set {
+                this["IdleMessageInterval"] = value;
+            }
+        }
     }
 }

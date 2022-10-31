@@ -26,5 +26,11 @@
     <Setting Name="PoolingTypeObservationInterval" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
+    <Setting Name="IdleMessage" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="IdleMessageInterval" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

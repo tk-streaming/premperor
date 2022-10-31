@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using System.Net;
 using Fleck;
+using System.Linq;
 
 namespace premperor
 {
@@ -12,12 +13,18 @@ namespace premperor
     {
         private bool running = false;
         private ConcurrentQueue<CommentInfo> commentInfoQueue;
+        private string[] idleMessage;
+        private int indexOfIdleMessage = 0;
+        private int idleCount = 0;
         public Action<CommentInfo> OnSend { get; set; }
         private IList<IWebSocketConnection> sockets = new List<IWebSocketConnection>();
 
         public SimpleServer(ConcurrentQueue<CommentInfo> commentInfoQueue)
         {
             this.commentInfoQueue = commentInfoQueue;
+            this.idleMessage = Premperor.Default.IdleMessage.Split(new string[] { "\r\n" }, StringSplitOptions.None)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .ToArray();
         }
 
         public void Start()
@@ -78,16 +85,44 @@ namespace premperor
                         OnSend?.Invoke(commentInfo);
                         foreach (var socket in sockets)
                         {
-                            socket.Send(System.Text.Json.JsonSerializer.Serialize(commentInfo));
+                            var json = System.Text.Json.JsonSerializer.Serialize(new Payload("comment", commentInfo));
+                            socket.Send(json);
                         }
                         Task.Delay((int)Premperor.Default.SendInterval).Wait();
+                        this.idleCount = 0;
                     }
                     else
                     {
                         Task.Delay(100).Wait();
+                        this.idleCount = this.idleCount + 100;
+
+                        if (this.idleMessage.Length > 0 && this.idleCount > Premperor.Default.IdleMessageInterval)
+                        {
+                            var msg = this.idleMessage[this.indexOfIdleMessage];
+                            foreach (var socket in sockets)
+                            {
+                                var json = System.Text.Json.JsonSerializer.Serialize(new Payload("message", msg));
+                                socket.Send(json);
+                            }
+
+                            Task.Delay((int)Premperor.Default.SendInterval).Wait();
+                            this.idleCount = 0;
+                            this.indexOfIdleMessage = (this.indexOfIdleMessage + 1) % this.idleMessage.Length;
+                        }
                     }
                 }
             });
         }
+    }
+
+    public struct Payload
+    {
+        public Payload(string name, object data)
+        {
+            this.name = name;
+            this.data = data;
+        }
+        public object data { get; set; }
+        public string name { get; set; }
     }
 }
